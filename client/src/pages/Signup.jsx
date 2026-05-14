@@ -1,118 +1,129 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 import {
-  Container,
-  Form,
-  Button,
-  Card
+    Container,
+    Form,
+    Button,
+    Card
 } from "react-bootstrap";
 
 import axios from "axios";
 
 const Signup = () => {
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    role: "member"
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        password: "",
+        role: "member"
     });
-  };
 
-  const handleSignup = async (e) => {
-    e.preventDefault();
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
 
-    try {
+    const handleSignup = async (e) => {
+        e.preventDefault();
 
-      await axios.post(
-        "http://localhost:5000/api/auth/register",
-        formData
-      );
+        try {
 
-      toast.success(
-        "Signup Successful"
-      );
+            await axios.post(
+                "http://localhost:5000/api/auth/register",
+                formData
+            );
 
-      window.location.replace("/");
+            toast.success(
+                "Signup Successful"
+            );
 
-    } catch (error) {
+            window.location.replace("/");
 
-      toast.error(
-        error.response.data.message
-      );
+        } catch (error) {
 
-    }
-  };
+            toast.error(
+                error.response.data.message
+            );
 
-  return (
-    <Container className="d-flex justify-content-center align-items-center vh-100">
+        }
+    };
 
-      <Card className="p-4 shadow" style={{ width: "400px" }}>
+    return (
+        <Container className="d-flex justify-content-center align-items-center vh-100">
 
-        <h2 className="text-center mb-4">
-          Signup
-        </h2>
+            <Card className="p-4 shadow" style={{ width: "400px" }}>
 
-        <Form onSubmit={handleSignup}>
+                <h2 className="text-center mb-4">
+                    Signup
+                </h2>
 
-          <Form.Control
-            className="mb-3"
-            name="name"
-            placeholder="Full Name"
-            onChange={handleChange}
-          />
+                <Form onSubmit={handleSignup}>
 
-          <Form.Control
-            className="mb-3"
-            name="email"
-            placeholder="Email"
-            onChange={handleChange}
-          />
+                    <Form.Control
+                        className="mb-3"
+                        name="name"
+                        placeholder="Full Name"
+                        onChange={handleChange}
+                    />
 
-          <Form.Control
-            className="mb-3"
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={handleChange}
-          />
+                    <Form.Control
+                        className="mb-3"
+                        name="email"
+                        placeholder="Email"
+                        onChange={handleChange}
+                    />
 
-          <Form.Select
-            className="mb-3"
-            name="role"
-            onChange={handleChange}
-          >
+                    <Form.Control
+                        className="mb-3"
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        onChange={handleChange}
+                    />
 
-            <option value="member">
-              Member
-            </option>
+                    <Form.Select
+                        className="mb-3"
+                        name="role"
+                        onChange={handleChange}
+                    >
 
-            <option value="admin">
-              Admin
-            </option>
+                        <option value="member">
+                            Member
+                        </option>
 
-          </Form.Select>
+                        <option value="admin">
+                            Admin
+                        </option>
 
-          <Button
-            type="submit"
-            className="w-100"
-          >
-            Signup
-          </Button>
+                    </Form.Select>
 
-        </Form>
+                    <Button
+                        type="submit"
+                        className="w-100"
+                    >
+                        Signup
+                    </Button>
 
-      </Card>
+                    <p className="text-center mt-3">
 
-    </Container>
-  );
+                        Already have an account?{" "}
+
+                        <Link to="/">
+                            Login
+                        </Link>
+
+                    </p>
+
+                </Form>
+
+            </Card>
+
+        </Container>
+    );
 };
 
 export default Signup;
