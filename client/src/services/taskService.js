@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api/tasks"
+  baseURL: "http://positive-prosperity-production-0062.up.railway.app/api/tasks"
 });
 
 export const createTask = (taskData) => {

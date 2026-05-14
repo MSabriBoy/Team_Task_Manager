@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api/projects"
+  baseURL: "http://positive-prosperity-production-0062.up.railway.app/api/projects"
 });
 
 export const createProject = (projectData) => {
