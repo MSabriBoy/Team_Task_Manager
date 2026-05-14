@@ -37,15 +37,15 @@ const Login = () => {
                 res.data.token
             );
 
+            localStorage.setItem(
+                "role",
+                res.data.role
+            );
+
             toast.success("Login Successful");
-           localStorage.setItem(
-  "token",
-  res.data.token
-);
+            window.location.replace("/dashboard");
 
-window.location.replace("/dashboard");
-
-            console.log(res.data);
+           
 
         } catch (error) {
 
