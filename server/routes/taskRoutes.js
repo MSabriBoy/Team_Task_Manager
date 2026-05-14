@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const { createTask, updateTaskStatus } = require("../controllers/taskController");
+const {
+  createTask,
+  updateTaskStatus,
+  getTasks
+} = require("../controllers/taskController");
 
 const protect = require("../middleware/authMiddleware");
 const authorizeRole = require("../middleware/roleMiddleware");
@@ -18,6 +22,12 @@ router.put(
     "/:id/status",
     protect,
     updateTaskStatus
+);
+
+router.get(
+  "/",
+  protect,
+  getTasks
 );
 
 module.exports = router;
