@@ -38,7 +38,12 @@ const Login = () => {
             );
 
             toast.success("Login Successful");
-           window.location.href = "/dashboard";
+           localStorage.setItem(
+  "token",
+  res.data.token
+);
+
+window.location.replace("/dashboard");
 
             console.log(res.data);
 
