@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
     Container,
     Form,
@@ -96,6 +96,16 @@ const Login = () => {
                     >
                         Login
                     </Button>
+
+                    <p className="text-center mt-3">
+
+  Don't have an account?{" "}
+
+  <Link to="/signup">
+    Signup
+  </Link>
+
+</p>
 
                 </Form>
 
