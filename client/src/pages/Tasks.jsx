@@ -17,11 +17,11 @@ import {
 
 import { getProjects } from "../services/projectService";
 
+import { getUsers } from "../services/userService";
+
 const Tasks = () => {
 
     const [tasks, setTasks] = useState([]);
-
-    const [projects, setProjects] = useState([]);
 
     const [taskData, setTaskData] = useState({
         title: "",
@@ -31,9 +31,13 @@ const Tasks = () => {
         dueDate: ""
     });
 
+    const [projects, setProjects] = useState([]);
+    const [users, setUsers] = useState([]);
+
     useEffect(() => {
         fetchTasks();
         fetchProjects();
+        fetchUsers();
     }, []);
 
     const fetchTasks = async () => {
@@ -55,6 +59,25 @@ const Tasks = () => {
             const res = await getProjects();
 
             setProjects(res.data);
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+    };
+
+    const fetchUsers = async () => {
+
+        try {
+
+            const res = await getUsers();
+
+            const members = res.data.filter(
+                (user) => user.role === "member"
+            );
+
+            setUsers(members);
 
         } catch (error) {
 
@@ -159,12 +182,28 @@ const Tasks = () => {
 
                     </Form.Select>
 
-                    <Form.Control
+                    <Form.Select
                         className="mb-3"
                         name="assignedTo"
-                        placeholder="Member ID"
                         onChange={handleChange}
-                    />
+                    >
+
+                        <option>
+                            Select Member
+                        </option>
+
+                        {
+                            users.map((user) => (
+                                <option
+                                    key={user._id}
+                                    value={user._id}
+                                >
+                                    {user.name}
+                                </option>
+                            ))
+                        }
+
+                    </Form.Select>
 
                     <Form.Control
                         className="mb-3"
