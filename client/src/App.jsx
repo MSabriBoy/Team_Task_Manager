@@ -5,8 +5,6 @@ import {
   Navigate
 } from "react-router-dom";
 
-import { useEffect, useState } from "react";
-
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
@@ -18,15 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
 
-  const [token, setToken] = useState(null);
-
-  useEffect(() => {
-
-    setToken(
-      localStorage.getItem("token")
-    );
-
-  }, []);
+  const token = localStorage.getItem("token");
 
   return (
     <BrowserRouter>
@@ -37,7 +27,11 @@ function App() {
 
         <Route
           path="/"
-          element={<Login />}
+          element={
+            token
+              ? <Navigate to="/dashboard" />
+              : <Login />
+          }
         />
 
         <Route
