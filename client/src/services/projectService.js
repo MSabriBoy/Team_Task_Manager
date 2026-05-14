@@ -18,3 +18,17 @@ export const createProject = (projectData) => {
     }
   );
 };
+
+export const getProjects = () => {
+
+  const token = localStorage.getItem("token");
+
+  return API.get(
+    "/",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+};
