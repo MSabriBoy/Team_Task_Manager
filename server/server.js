@@ -13,7 +13,12 @@ const app= express()
 
 connectDB();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://comfortable-acceptance-production-b455.up.railway.app",
+    credentials: true
+  })
+);
 app.use(express.json())
 app.use("/api/auth/",authRoutes)
 app.use("/api/projects", projectRoutes)
