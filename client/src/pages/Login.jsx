@@ -38,7 +38,7 @@ const Login = () => {
             );
 
             toast.success("Login Successful");
-            navigate("/dashboard");
+           window.location.href = "/dashboard";
 
             console.log(res.data);
 
