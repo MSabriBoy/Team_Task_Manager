@@ -34,6 +34,8 @@ const Tasks = () => {
     const [projects, setProjects] = useState([]);
     const [users, setUsers] = useState([]);
 
+    const role = localStorage.getItem("role");
+
     useEffect(() => {
         fetchTasks();
         fetchProjects();
@@ -137,88 +139,92 @@ const Tasks = () => {
     return (
         <Container className="mt-5">
 
-            <Card className="p-4 shadow mb-4">
+            {
+                role === "admin" && (
+                    <Card className="p-4 shadow mb-4">
 
-                <h2 className="mb-4">
-                    Create Task
-                </h2>
+                        <h2 className="mb-4">
+                            Create Task
+                        </h2>
 
-                <Form onSubmit={handleSubmit}>
+                        <Form onSubmit={handleSubmit}>
 
-                    <Form.Control
-                        className="mb-3"
-                        name="title"
-                        placeholder="Task Title"
-                        onChange={handleChange}
-                    />
+                            <Form.Control
+                                className="mb-3"
+                                name="title"
+                                placeholder="Task Title"
+                                onChange={handleChange}
+                            />
 
-                    <Form.Control
-                        className="mb-3"
-                        name="description"
-                        placeholder="Task Description"
-                        onChange={handleChange}
-                    />
+                            <Form.Control
+                                className="mb-3"
+                                name="description"
+                                placeholder="Task Description"
+                                onChange={handleChange}
+                            />
 
-                    <Form.Select
-                        className="mb-3"
-                        name="project"
-                        onChange={handleChange}
-                    >
+                            <Form.Select
+                                className="mb-3"
+                                name="project"
+                                onChange={handleChange}
+                            >
 
-                        <option>
-                            Select Project
-                        </option>
-
-                        {
-                            projects.map((project) => (
-                                <option
-                                    key={project._id}
-                                    value={project._id}
-                                >
-                                    {project.name}
+                                <option>
+                                    Select Project
                                 </option>
-                            ))
-                        }
 
-                    </Form.Select>
+                                {
+                                    projects.map((project) => (
+                                        <option
+                                            key={project._id}
+                                            value={project._id}
+                                        >
+                                            {project.name}
+                                        </option>
+                                    ))
+                                }
 
-                    <Form.Select
-                        className="mb-3"
-                        name="assignedTo"
-                        onChange={handleChange}
-                    >
+                            </Form.Select>
 
-                        <option>
-                            Select Member
-                        </option>
+                            <Form.Select
+                                className="mb-3"
+                                name="assignedTo"
+                                onChange={handleChange}
+                            >
 
-                        {
-                            users.map((user) => (
-                                <option
-                                    key={user._id}
-                                    value={user._id}
-                                >
-                                    {user.name}
+                                <option>
+                                    Select Member
                                 </option>
-                            ))
-                        }
 
-                    </Form.Select>
+                                {
+                                    users.map((user) => (
+                                        <option
+                                            key={user._id}
+                                            value={user._id}
+                                        >
+                                            {user.name}
+                                        </option>
+                                    ))
+                                }
 
-                    <Form.Control
-                        className="mb-3"
-                        type="date"
-                        name="dueDate"
-                        onChange={handleChange}
-                    />
+                            </Form.Select>
 
-                    <Button type="submit">
-                        Create Task
-                    </Button>
+                            <Form.Control
+                                className="mb-3"
+                                type="date"
+                                name="dueDate"
+                                onChange={handleChange}
+                            />
 
-                </Form>
+                            <Button type="submit">
+                                Create Task
+                            </Button>
 
-            </Card>
+                        </Form>
+
+                    </Card>
+                )
+            }
 
             <Card className="p-4 shadow">
 
