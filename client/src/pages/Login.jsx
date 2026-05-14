@@ -1,100 +1,103 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import {
-  Container,
-  Form,
-  Button,
-  Card
+    Container,
+    Form,
+    Button,
+    Card
 } from "react-bootstrap";
 
 import { loginUser } from "../services/authService";
 
 const Login = () => {
+    const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: ""
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+    const [formData, setFormData] = useState({
+        email: "",
+        password: ""
     });
-  };
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
 
-    try {
+    const handleLogin = async (e) => {
+        e.preventDefault();
 
-      const res = await loginUser(formData);
+        try {
 
-      localStorage.setItem(
-        "token",
-        res.data.token
-      );
+            const res = await loginUser(formData);
 
-      toast.success("Login Successful");
+            localStorage.setItem(
+                "token",
+                res.data.token
+            );
 
-      console.log(res.data);
+            toast.success("Login Successful");
+            navigate("/dashboard");
 
-    } catch (error) {
+            console.log(res.data);
 
-      toast.error(error.response.data.message);
+        } catch (error) {
 
-    }
-  };
+            toast.error(error.response.data.message);
 
-  return (
-    <Container className="d-flex justify-content-center align-items-center vh-100">
+        }
+    };
 
-      <Card className="p-4 shadow" style={{ width: "400px" }}>
-        
-        <h2 className="text-center mb-4">
-          Login
-        </h2>
+    return (
+        <Container className="d-flex justify-content-center align-items-center vh-100">
 
-        <Form onSubmit={handleLogin}>
+            <Card className="p-4 shadow" style={{ width: "400px" }}>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Email</Form.Label>
+                <h2 className="text-center mb-4">
+                    Login
+                </h2>
 
-            <Form.Control
-              type="email"
-              name="email"
-              onChange={handleChange}
-              placeholder="Enter email"
-            />
+                <Form onSubmit={handleLogin}>
 
-          </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Email</Form.Label>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Password</Form.Label>
+                        <Form.Control
+                            type="email"
+                            name="email"
+                            onChange={handleChange}
+                            placeholder="Enter email"
+                        />
 
-            <Form.Control
-              type="password"
-              name="password"
-              onChange={handleChange}
-              placeholder="Enter password"
-            />
+                    </Form.Group>
 
-          </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Password</Form.Label>
 
-          <Button
-            type="submit"
-            variant="primary"
-            className="w-100"
-          >
-            Login
-          </Button>
+                        <Form.Control
+                            type="password"
+                            name="password"
+                            onChange={handleChange}
+                            placeholder="Enter password"
+                        />
 
-        </Form>
+                    </Form.Group>
 
-      </Card>
+                    <Button
+                        type="submit"
+                        variant="primary"
+                        className="w-100"
+                    >
+                        Login
+                    </Button>
 
-    </Container>
-  );
+                </Form>
+
+            </Card>
+
+        </Container>
+    );
 };
 
 export default Login;
