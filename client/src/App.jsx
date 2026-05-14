@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Projects from "./pages/Projects";
 
 function App() {
   return (
@@ -25,7 +26,11 @@ function App() {
           path="/dashboard"
           element={<Dashboard />}
         />
-
+        <Route
+          path="/projects"
+          element={<Projects />}
+        />
+        
       </Routes>
 
       <ToastContainer />
