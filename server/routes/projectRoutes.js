@@ -1,16 +1,25 @@
-    const express = require('express')
-    const router  = express.Router()
+const express = require('express')
+const router = express.Router()
 
-    const {createProject} = require("../controllers/projectController")
+const {
+    createProject,
+    getProjects
+} = require("../controllers/projectController");
 
-    const protect= require("../middleware/authMiddleware")
-    const authorizedRole = require("../middleware/roleMiddleware")
+const protect = require("../middleware/authMiddleware")
+const authorizedRole = require("../middleware/roleMiddleware")
 
-    router.post(
-        "/create",
-        protect,
-        authorizedRole("admin"),
-        createProject
-    );
+router.post(
+    "/create",
+    protect,
+    authorizedRole("admin"),
+    createProject
+);
 
-    module.exports = router;
+router.get(
+    "/",
+    protect,
+    getProjects
+);
+
+module.exports = router;
