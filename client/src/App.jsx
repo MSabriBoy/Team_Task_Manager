@@ -14,9 +14,12 @@ import Tasks from "./pages/Tasks";
 import AppNavbar from "./components/Navbar";
 
 function App() {
+
+  const token = localStorage.getItem("token");
+
   return (
     <BrowserRouter>
-    <AppNavbar />
+   {token && <AppNavbar />}
 
       <Routes>
 
