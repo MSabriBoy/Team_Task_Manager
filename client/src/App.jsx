@@ -1,7 +1,8 @@
 import {
   BrowserRouter,
   Routes,
-  Route
+  Route,
+  Navigate
 } from "react-router-dom";
 
 import Login from "./pages/Login";
@@ -29,19 +30,31 @@ function App() {
         />
 
         <Route
-          path="/dashboard"
-          element={<Dashboard />}
-        />
+  path="/dashboard"
+  element={
+    token
+      ? <Dashboard />
+      : <Navigate to="/" />
+  }
+/>
 
         <Route
-          path="/projects"
-          element={<Projects />}
-        />
+  path="/projects"
+  element={
+    token
+      ? <Projects />
+      : <Navigate to="/" />
+  }
+/>
 
         <Route
-          path="/tasks"
-          element={<Tasks />}
-        />
+  path="/tasks"
+  element={
+    token
+      ? <Tasks />
+      : <Navigate to="/" />
+  }
+/>
 
       </Routes>
 
