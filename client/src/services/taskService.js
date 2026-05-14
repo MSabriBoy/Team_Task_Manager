@@ -18,3 +18,32 @@ export const createTask = (taskData) => {
     }
   );
 };
+
+export const getTasks = () => {
+
+  const token = localStorage.getItem("token");
+
+  return API.get(
+    "/",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+};
+
+export const updateTaskStatus = (taskId, status) => {
+
+  const token = localStorage.getItem("token");
+
+  return API.put(
+    `/${taskId}/status`,
+    { status },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+};
