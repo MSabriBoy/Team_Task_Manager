@@ -67,7 +67,19 @@ const updateTaskStatus = async (req, res) => {
 const getTasks = async (req, res) => {
     try {
 
-        const tasks = await Task.find();
+        let tasks;
+
+        if (req.user.role === "admin") {
+
+            tasks = await Task.find();
+
+        } else {
+
+            tasks = await Task.find({
+                assignedTo: req.user.id
+            });
+
+        }
 
         res.status(200).json(tasks);
 
