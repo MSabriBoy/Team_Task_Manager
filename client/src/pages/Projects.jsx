@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { createProject } from "../services/projectService"; 
 import {
   Container,
   Form,
@@ -19,6 +21,26 @@ const Projects = () => {
       [e.target.name]: e.target.value
     });
   };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+
+    await createProject(projectData);
+
+    toast.success("Project created successfully");
+
+    setProjectData({
+      name: "",
+      description: ""
+    });
+
+  } catch (error) {
+
+    toast.error(error.response.data.message);
+
+  }
+};
 
   return (
     <Container className="mt-5">
@@ -29,7 +51,7 @@ const Projects = () => {
           Create Project
         </h2>
 
-        <Form>
+        <Form onSubmit={handleSubmit}>
 
           <Form.Group className="mb-3">
             <Form.Label>
