@@ -11,10 +11,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Projects from "./pages/Projects";
 import Tasks from "./pages/Tasks";
+import AppNavbar from "./components/Navbar";
 
 function App() {
   return (
     <BrowserRouter>
+    <AppNavbar />
 
       <Routes>
 
