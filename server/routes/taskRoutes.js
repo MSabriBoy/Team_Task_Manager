@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { createTask } = require("../controllers/taskController");
+const { createTask, updateTaskStatus } = require("../controllers/taskController");
 
 const protect = require("../middleware/authMiddleware");
 const authorizeRole = require("../middleware/roleMiddleware");
@@ -12,6 +12,12 @@ router.post(
     protect,
     authorizeRole("admin"),
     createTask
+);
+
+router.put(
+    "/:id/status",
+    protect,
+    updateTaskStatus
 );
 
 module.exports = router;
