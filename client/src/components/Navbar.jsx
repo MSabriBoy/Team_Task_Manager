@@ -11,13 +11,10 @@ const AppNavbar = () => {
 
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-
-        localStorage.removeItem("token");
-
-        navigate("/");
-
-    };
+  const handleLogout = () => {
+  localStorage.removeItem("token");
+  window.location.replace("/");
+};
 
     return (
         <Navbar bg="dark" variant="dark">
