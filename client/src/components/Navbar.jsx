@@ -40,8 +40,8 @@ const AppNavbar = () => {
                         )
                     }
 
-                <Nav.Link as={Link} to="/tasks">
-    My Tasks
+              <Nav.Link as={Link} to="/tasks">
+    {role === "admin" ? "Tasks" : "My Tasks"}
 </Nav.Link>
 
                     <Nav.Link onClick={handleLogout}>
