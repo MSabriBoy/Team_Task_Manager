@@ -10,11 +10,12 @@ import { useNavigate } from "react-router-dom";
 const AppNavbar = () => {
 
     const navigate = useNavigate();
+    const role = localStorage.getItem("role");
 
-  const handleLogout = () => {
-  localStorage.removeItem("token");
-  window.location.replace("/");
-};
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        window.location.replace("/");
+    };
 
     return (
         <Navbar bg="dark" variant="dark">
@@ -31,13 +32,21 @@ const AppNavbar = () => {
                         Dashboard
                     </Nav.Link>
 
-                    <Nav.Link as={Link} to="/projects">
-                        Projects
-                    </Nav.Link>
+                    {
+                        role === "admin" && (
+                            <Nav.Link as={Link} to="/projects">
+                                Projects
+                            </Nav.Link>
+                        )
+                    }
 
-                    <Nav.Link as={Link} to="/tasks">
-                        Tasks
-                    </Nav.Link>
+                    {
+                        role === "admin" && (
+                            <Nav.Link as={Link} to="/tasks">
+                                Tasks
+                            </Nav.Link>
+                        )
+                    }
 
                     <Nav.Link onClick={handleLogout}>
                         Logout
